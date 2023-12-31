@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>Actualizando precios...</h1>
+    <p id="estado"></p>
+{% endblock %}
+
+{% block scripts %}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+        function actualizarEstado() {
+            $.getJSON('/estado_actualizacion', function(data) {
+                if (data.running) {
+                    $('#estado').text(data.processed + ' precios actualizados de ' + data.total);
+                } else {
+                    $('#estado').text('Actualización completada');
+                    clearInterval(interval);
+                }
+            });
+        }
+
+        $(document).ready(function() {
+            interval = setInterval(actualizarEstado, 2000); // Actualizar cada 2 segundos
+        });
+    </script>
+{% endblock %}

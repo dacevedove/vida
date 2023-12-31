@@ -1,0 +1,75 @@
+{% extends "base.html" %}
+
+{% block title %}Listar Productos{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <div class="container mt-4">
+        <div class="row">
+            <div class="col-sm">
+                <h2>Productos</h2>
+            </div>
+            <div class="col-sm text-right">
+                    <!-- Antes de la tabla -->
+                <a href="{{ url_for('bp.nuevo_producto') }}" class="btn btn-primary mb-3">+ Añadir Nuevo Producto</a>
+            </div>
+        </div>
+
+                    <!-- Filtro por categoría -->
+                    <form action="{{ url_for('bp.listar_productos') }}" method="get" class="mb-3">
+                        <div class="row">
+                            <div class="col-sm">
+                                <div class="form-group">
+                                    <select class="form-control" name="categoria_id">
+                                        <option value="">Todas las Categorías</option>
+                                        {% for categoria in categorias %}
+                                            <option value="{{ categoria.id }}">{{ categoria.nombre }}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                            </div>
+                             <div class="col-sm">
+                                <button type="submit" class="btn btn-primary">Filtrar</button>
+                            </div>
+                        </div>
+                    </form>
+
+    <!-- Lista de productos -->
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Producto</th>
+                <th>Categoría</th>
+                <th>Vida</th>
+                <th>Kalea</th>
+                <th>Kromi</th>
+                <th>TuZonaMarket</th>
+                <th>Editar</th>
+                <th>Eliminar</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for producto in productos %}
+            <tr>
+                <td>{{ producto.nombre }}</td>
+                <td>{{ producto.categoria.nombre }}</td>
+                <td>{% if producto.url_vida %}<i class="bi bi-check-circle-fill text-success"></i>{% else %}<i class="bi bi-x-circle-fill text-danger"></i>{% endif %}</td>
+                <td>{% if producto.url_kalea %}<i class="bi bi-check-circle-fill text-success"></i>{% else %}<i class="bi bi-x-circle-fill text-danger"></i>{% endif %}</td>
+                <td>{% if producto.url_kromi %}<i class="bi bi-check-circle-fill text-success"></i>{% else %}<i class="bi bi-x-circle-fill text-danger"></i>{% endif %}</td>
+                <td>{% if producto.url_tuzonamarket %}<i class="bi bi-check-circle-fill text-success"></i>{% else %}<i class="bi bi-x-circle-fill text-danger"></i>{% endif %}</td>
+                <td>
+                    <a href="{{ url_for('bp.editar_producto', id=producto.id) }}" class="btn btn-secondary btn-sm">
+                        <i class="bi bi-pencil"></i>
+                    </a>
+                </td>
+                <td>
+                    <a href="{{ url_for('bp.eliminar_producto', id=producto.id) }}" class="btn btn-danger btn-sm">
+                        <i class="bi bi-trash"></i>
+                    </a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

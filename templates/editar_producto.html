@@ -1,0 +1,90 @@
+{% extends "base.html" %}
+
+{% block title %}Editar Producto{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2>Editar Producto</h2>
+    <form action="{{ url_for('bp.editar_producto', id=producto.id) }}" method="post">
+    <div class="row">
+        <div class="form-group col">
+            <label for="nombre">Nombre del Producto:</label>
+            <input type="text" class="form-control" id="nombre" name="nombre"  value="{{ producto.nombre }}" required>
+        </div>
+
+        <div class="form-group col">
+            <label for="categoria_id">Categoría:</label>
+            <select class="form-control" id="categoria_id" name="categoria_id"  value="{{ producto.Categoría }}" required>
+                {% for categoria in categorias %}
+                    <option value="{{ categoria.id }}">{{ categoria.nombre }}</option>
+                {% endfor %}
+            </select>
+        </div>
+    </div>
+
+    <div class="grupo_producto_formulario row">
+        <div class="form-group col-sm">
+            <label for="titulo_vida">Titulo Vida:</label>      
+            <input type="text" class="form-control" id="titulo_vida" name="titulo_vida"  value="{{ producto.titulo_vida }}">
+        </div>
+        <div class="form-group col-sm">
+            <label for="url_vida">URL Vida:</label>
+            <input type="text" class="form-control" id="url_vida" name="url_vida"  value="{{ producto.url_vida }}">
+            <input type="hidden" value="1" class="form-control" id="url_kalea" name="factor_vida"  value="{{ producto.factor_vida }}">
+        </div>
+    </div>
+
+    <div class="grupo_producto_formulario row">
+        <div class="form-group col-sm">
+            <label for="titulo_kalea">Titulo Kalea:</label>      
+            <input type="text" class="form-control" id="titulo_kalea" name="titulo_kalea"  value="{{ producto.titulo_kalea }}">
+        </div>
+
+        <div class="form-group col-sm">
+            <label for="url_kalea">URL Kalea:</label>
+            <input type="text" class="form-control" id="url_kalea" name="url_kalea"  value="{{ producto.url_kalea }}">
+        </div>
+
+        <div class="form-group col-sm">
+            <label for="factor_kalea">Factor:</label>
+            <input type="number" placeholder="1,0" step="0.01" class="form-control" id="factor_kalea" name="factor_kalea"  value="{{ producto.factor_kalea }}">
+        </div>
+    </div>
+
+    <div class="grupo_producto_formulario row">
+        <div class="form-group col-sm">
+            <label for="titulo_kromi">Titulo Kromi:</label>      
+            <input type="text" class="form-control" id="titulo_kromi" name="titulo_kromi"  value="{{ producto.titulo_kromi }}">
+        </div>
+
+        <div class="form-group col-sm">
+            <label for="url_kromi">URL Kromi:</label>
+            <input type="text" class="form-control" id="url_kromi" name="url_kromi"  value="{{ producto.url_kromi }}">
+        </div>
+
+        <div class="form-group col-sm">
+            <label for="factor_kromi">Factor:</label>
+            <input type="number" placeholder="1,0" step="0.01"  class="form-control" id="factor_kromi" name="factor_kromi"  value="{{ producto.factor_kromi }}">
+        </div>
+    </div>
+
+    <div class="grupo_producto_formulario row">
+
+        <div class="form-group col-sm">
+            <label for="titulo_tuzonamarket">Titulo TuZonaMarket:</label>      
+            <input type="text" class="form-control" id="titulo_tuzonamarket" name="titulo_tuzonamarket"  value="{{ producto.titulo_tuzonamarket }}">
+        </div>
+        <div class="form-group col-sm">
+            <label for="url_tuzonamarket">URL TuZonaMarket:</label>
+            <input type="text" class="form-control" id="url_tuzonamarket" name="url_tuzonamarket"  value="{{ producto.url_tuzonamarket }}">
+        </div>
+        <div class="form-group col-sm">
+            <label for="factor_tuzonamarket">Factor:</label>
+            <input type="number" placeholder="1,0" step="0.01"  class="form-control" id="factor_tuzonamarket" name="factor_tuzonamarket"  value="{{ producto.factor_tuzonamarket }}">
+        </div>
+    </div>
+
+        <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+    </form>
+</div>
+{% endblock %}

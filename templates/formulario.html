@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+
+{% block title %}Nuevo Producto{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2>Formulario de Producto</h2>
+    <form action="/producto" method="post">
+        <div class="form-group">
+            <label for="nombre">Nombre del Producto:</label>
+            <input type="text" class="form-control" id="nombre" name="nombre" required>
+        </div>
+
+        <div class="form-group">
+            <label for="categoria_id">Categoría:</label>
+            <select class="form-control" id="categoria_id" name="categoria_id" required>
+                {% for categoria in categorias %}
+                    <option value="{{ categoria.id }}">{{ categoria.nombre }}</option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="url_kalea">URL Kalea:</label>
+            <input type="text" class="form-control" id="url_kalea" name="url_kalea">
+        </div>
+
+        <div class="form-group">
+            <label for="url_kromi">URL Kromi:</label>
+            <input type="text" class="form-control" id="url_kromi" name="url_kromi">
+        </div>
+
+        <div class="form-group">
+            <label for="url_tuzonamarket">URL TuZonaMarket:</label>
+            <input type="text" class="form-control" id="url_tuzonamarket" name="url_tuzonamarket">
+        </div>
+
+        <div class="form-group">
+            <label for="url_vida">URL Vida:</label>
+            <input type="text" class="form-control" id="url_vida" name="url_vida">
+        </div>
+
+        <button type="submit" class="btn btn-primary">Crear Producto</button>
+    </form>
+</div>
+{% endblock %}
